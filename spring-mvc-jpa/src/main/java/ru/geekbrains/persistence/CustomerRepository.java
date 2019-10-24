@@ -16,7 +16,7 @@ public class CustomerRepository {
     public CustomerRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
+//hdjfs
     public void create(Customer customer) {
         EntityManager em = sessionFactory.createEntityManager();
         em.getTransaction().begin();
