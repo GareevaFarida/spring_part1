@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="spring-mvc-xml" />
         <module name="spring-mvc-jpa" />
+        <module name="spring-mvc-jpa-less4" />
         <module name="servlet-app" />
         <module name="spring-mvc-java" />
       </profile>
