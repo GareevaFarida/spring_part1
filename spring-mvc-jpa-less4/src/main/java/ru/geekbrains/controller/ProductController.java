@@ -13,10 +13,7 @@ import ru.geekbrains.persistence.ProductRepository;
 import ru.geekbrains.persistence.entity.Category;
 import ru.geekbrains.persistence.entity.Product;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("products")
@@ -27,8 +24,8 @@ public class ProductController {
 
     private final CategoryRepository categoryRepository;
 
-    @PersistenceContext
-    private EntityManager em;
+//    @PersistenceContext
+//    private EntityManager em;
 
     @Autowired
     public ProductController(ProductRepository productRepository, CategoryRepository categoryRepository) {
@@ -38,39 +35,15 @@ public class ProductController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String products(@RequestParam(name = "categoryId", required = false) Long categoryId,
-                           @RequestParam(name = "priceSelected", required = false) String priceSelected,
+                           @RequestParam(name = "priceType", required = false) String priceType,
+                           @RequestParam(name = "minPrice", required = false) BigDecimal minPrice,
+                           @RequestParam(name = "maxPrice", required = false) BigDecimal maxPrice,
                            Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
-        if (categoryId == null || categoryId == -1) {
-            model.addAttribute("products", productRepository.findAll());
-        } else {
-            model.addAttribute("products", productRepository.getAllByCategory_Id(categoryId));
-        }
-
-
-        if (priceSelected == "priceNotSelected") {
-            model.addAttribute("categories", categoryRepository.findAll());
-            if (categoryId == null || categoryId == -1) {
-                model.addAttribute("products", productRepository.findAll());
-            } else {
-                model.addAttribute("products", productRepository.getAllByCategory_Id(categoryId));
-            }
-        } else {
-            String sqltext_min;
-            if (priceSelected == "priceMax") {
-                sqltext_min = new String("select a from Product a where a.category.id = :paramCategoryId order by price desc");
-
-            } else if (priceSelected == "priceMin") {
-                sqltext_min = new String("select a from Product a where a.category.id = :paramCategoryId order by price");
-            } else if (priceSelected == "priceMaxAndMin") {
-                sqltext_min = new String("select a from Product a where a.category.id = :paramCategoryId order by price desc");
-            }
-            TypedQuery<Product> query = em.createQuery(sqltext_min, Product.class);
-            query.setParameter("paramCategoryId", categoryId);
-            List<Product> allProducts = query.getResultList();
-            model.addAttribute("products", allProducts.get(0));
-        }
-
+        model.addAttribute("products", productRepository.getProductByCategoryAndPrice(categoryId,
+                priceType,
+                minPrice,
+                maxPrice));
 
         return "products";
     }

@@ -8,6 +8,28 @@
 
 <body>
 
+<form action="" method="get>
+    <label for="categoryFilter">Категория товара</label>
+<select id="categoryFilter" name="categoryId">
+    <option value="${-1}" ${param['categoryId'] == null || param['categoryId'] == -1 ? 'selected' : ''}></option>
+    <c:forEach items="${categories}" var="category">
+        <option value="${category.id}" ${param['categoryId'] == category.id ? 'selected' : ''} >${category.name}</option>
+    </c:forEach>
+</select>
+<br>
+<label for="priceFilter" style="padding: 10px 20px 20px 20px">Цена товара</label>
+<select id="priceFilter" name="priceType">
+    <option value="priceNotSelected" ${param['priceType']=="priceNotSelected"?'selected':''}></option>
+    <option value="priceMax" ${param['priceType']=="priceMax"?'selected':''}>максимальная цена</option>
+    <option value="priceMin" ${param['priceType']=="priceMin"?'selected':''}>минимальная цена</option>
+    <option value="priceMaxAndMin" ${param['priceType']=="priceMaxAndMin"?'selected':''}>диапазон цен</option>
+</select>
+<input type="number" name="minPrice" placeholder="Минимальная цена" style="margin-left: 20px" value=${param['minPrice']} >
+<input type="number" name="maxPrice" placeholder="Максимальная цена" style="margin-left: 20px" value=${param['maxPrice']} >
+<br>
+<input type="submit" value="Apply"/>
+</form>
+
 <table border="1">
     <tr>
         <th>Id</th>
@@ -16,28 +38,6 @@
         <th>Category</th>
         <th>Price</th>
     </tr>
-
-    <form action="" method="get">
-        <label for="categoryFilter" style="padding: 10px 20px 20px 20px">Category filter</label>
-        <select id="categoryFilter" name="categoryId">
-            <option value="${-1}" ${param['categoryId'] == null || param['categoryId'] == -1 ? 'selected' : ''}></option>
-            <c:forEach items="${categories}" var="category">
-                <option value="${category.id}" ${param['categoryId'] == category.id ? 'selected' : ''} >${category.name}</option>
-            </c:forEach>
-        </select>
-        <br>
-        <label for="priceFilter" style="padding: 10px 20px 20px 20px">Price filter</label>
-        <select id="priceFilter" name="priceSelected">
-            <option value="priceNotSelected" ${param['priceSelected']=="priceNotSelected"?'selected':''}></option>
-            <option value="priceMax" ${param['priceSelected']=="priceMax"?'selected':''}>максимальная цена</option>
-            <option value="priceMin" ${param['priceSelected']=="priceMin"?'selected':''}>минимальная цена</option>
-            <option value="priceMaxAndMin" ${param['priceSelected']=="priceMaxAndMin"?'selected':''}>максимальная и минимальная цены</option>
-        </select>
-        <br>
-        <input type="submit" value="Apply" />
-    </form>
-
-
     <c:forEach items="${products}" var="prod">
         <tr>
             <td>${prod.id}</td>
