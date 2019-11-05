@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title> Customers Thymeleaf</title>
+</head>
+
+<body>
+
+<a href="create">Create new Customer</a>
+
+<table border="1" th:unless="${customers.size() == 0}">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Contacts</th>
+    </tr>
+
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.id}">1</td>
+
+        <td>
+            <a th:href="@{/customers/edit?id={id}(id=${customer.id})}" th:text="${customer.name}">Ivan Petrov</a>
+        </td>
+
+        <td th:text="${customer.contacts}">+7(915)777-77-77</td>
+    </tr>
+
+</table>
+</body>
+
+</html>
