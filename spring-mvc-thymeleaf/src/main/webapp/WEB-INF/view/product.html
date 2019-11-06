@@ -9,7 +9,7 @@
 
 
 <form th:object="${product}" th:action="@{/products/save}" method="post">
-<!--Очень часто применяемый способ передачи id через форму-->
+    <!--Очень часто применяемый способ передачи id через форму-->
     <input type="hidden" name="id" id="id" th:field="*{id}">
     <input type="hidden" name="categoryId" id="categoryId" th:field = "*{categoryId}">
     <p>
@@ -28,7 +28,7 @@
         <label for="description">Description</label>
         <input type="text" id="description" name="description" th:field = "*{description}" />
     </p>
-    <input type="submit" />
+    <input type="submit" value="Сохранить"/>
 </form>
 
 </body>

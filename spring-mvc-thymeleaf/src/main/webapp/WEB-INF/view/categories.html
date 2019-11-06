@@ -8,7 +8,7 @@
 
 <body>
 
-<a href="create">Create new Category</a>
+<a th:href="@{/categories/create}">Create new Category</a>
 
 <table border="1" th:unless="${categories.size() == 0}">
     <tr>

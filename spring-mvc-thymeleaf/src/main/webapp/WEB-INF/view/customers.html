@@ -8,7 +8,7 @@
 
 <body>
 
-<a href="create">Create new Customer</a>
+<a th:href="@{/customers/create}">Create new Customer</a>
 
 <table border="1" th:unless="${customers.size() == 0}">
     <tr>

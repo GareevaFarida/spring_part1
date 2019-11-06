@@ -18,7 +18,7 @@
         <label for="description">Description</label>
         <input type="text" id="description" name="description" th:field="*{description}"/>
     </p>
-    <input type="submit"/>
+    <input type="submit" value="Сохранить">
 </form>
 
 <a th:href="@{/products/create?categoryId={categoryId}(categoryId=${category.id})}">Create new Product</a>
