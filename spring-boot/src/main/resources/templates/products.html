@@ -3,55 +3,77 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
     <title>Products Thymeleaf</title>
 </head>
 
 <body>
 
+<div class="container">
 
-<form action="" method="get" th:object="${filter}">
-    <label for="categoryFilter">Category filter</label>
-    <select id="categoryFilter" th:field="*{categoryId}">
-        <option th:value="${-1}"></option>
-        <option th:each="cat : ${categories}"
-                th:value="${cat.id}"
-                th:text="${cat.name}">Category</option>
-    </select>
+    <form action="" method="get" th:object="${filter}">
+        <label for="categoryFilter">Category filter</label>
+        <select id="categoryFilter" th:field="*{categoryId}">
+            <option th:value="${-1}"></option>
+            <option th:each="cat : ${categories}"
+                    th:value="${cat.id}"
+                    th:text="${cat.name}">Category
+            </option>
+        </select>
 
-    <label for="priceMin">Price from</label>
-    <input type="number" id="priceMin" th:field="*{priceMin}" />
+        <label for="priceMin">Price from</label>
+        <input type="number" id="priceMin" th:field="*{priceMin}"/>
 
-    <label for="priceMax">to</label>
-    <input type="number" id="priceMax" th:field="*{priceMax}" />
+        <label for="priceMax">to</label>
+        <input type="number" id="priceMax" th:field="*{priceMax}"/>
 
-    <input type="submit" value="Apply"/>
-</form>
+        <input type="submit" value="Apply"/>
+    </form>
 
-<table border="1">
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Price</th>
-    </tr>
+    <table class="table" border="1">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Price</th>
+        </tr>
 
 
-    <tr th:each="prod:${products}">
-        <td th:text="${prod.id}">4</td>
+        <tr th:each="prod:${products}">
+            <td th:text="${prod.id}">4</td>
 
-        <td>
-            <a th:href="@{/products/edit?id={id}(id=${prod.id})}" th:text="${prod.name}">Product</a>
-        </td>
+            <td>
+                <a th:href="@{/products/edit?id={id}(id=${prod.id})}" th:text="${prod.name}">Product</a>
+            </td>
 
-        <td th:text="${prod.description}">Описание</td>
+            <td th:text="${prod.description}">Описание</td>
 
-        <td th:text="${prod.categoryName}">Категория</td>
+            <td th:text="${prod.categoryName}">Категория</td>
 
-        <td th:text="${prod.price}">100.00</td>
-    </tr>
+            <td th:text="${prod.price}">100.00</td>
+        </tr>
 
-</table>
+    </table>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
 </body>
 
