@@ -6,11 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spring-mvc-xml" />
-        <module name="spring-mvc-jpa" />
-        <module name="servlet-app" />
         <module name="spring-mvc-java" />
+        <module name="servlet-app" />
+        <module name="spring-mvc-jpa" />
+        <module name="spring-mvc-thymeleaf" />
+        <module name="spring-mvc-jpa-less4" />
+        <module name="spring-mvc-xml" />
+        <module name="spring-boot" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="spring-boot" options="-parameters" />
+    </option>
   </component>
 </project>
