@@ -33,4 +33,14 @@ public class CategoryService {
     public void save(Category category) {
         categoryRepository.save(category);
     }
+
+    @Transactional
+    public void delete(Long id){
+        categoryRepository.deleteById(id);
+    }
+
+//    @Transactional
+//    public Category forRestApi_findCategoryByIdWithoutProducts(Long id){
+//        return categoryRepository.forRestApi_findByIdWithoutProducts(id);
+//    }
 }
