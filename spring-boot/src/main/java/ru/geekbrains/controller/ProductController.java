@@ -1,6 +1,7 @@
 package ru.geekbrains.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,8 +31,8 @@ public class ProductController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String products(@RequestParam(name = "categoryId", required = false) Long categoryId,
-                           @RequestParam(name = "priceMin", required = false) BigDecimal priceMin,
-                           @RequestParam(name = "priceMax", required = false) BigDecimal priceMax,
+                           @RequestParam(name = "priceFrom", required = false) BigDecimal priceMin,
+                           @RequestParam(name = "priceTo", required = false) BigDecimal priceMax,
                            Model model) {
 
         ProductFilter productFilter = new ProductFilter(categoryId,priceMin,priceMax);
@@ -42,12 +43,14 @@ public class ProductController {
         return "products";
     }
 
+    @Secured({"admin","manager"})
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public String createProductFrom(@RequestParam("categoryId") Long categoryId, Model model) {
         model.addAttribute("product", productService.getEmptyProductReprWithCategory(categoryId));
         return "product";
     }
 
+    @Secured({"admin","manager"})
     @RequestMapping(value = "edit", method = RequestMethod.GET)
     public String editProduct(@RequestParam("id") Long id, Model model) {
         model.addAttribute("product", productService.getProductReprById(id)
@@ -55,9 +58,10 @@ public class ProductController {
         return "product";
     }
 
+    @Secured({"admin","manager"})
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String createProduct(@ModelAttribute("product") ProductRepr productRepr) {
         productService.save(productRepr);
-        return "redirect:/categories/edit?id=" + productRepr.getCategoryId();
+        return "redirect:/admin/categories/edit?id=" + productRepr.getCategoryId();
     }
 }

@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="spring-mvc-java" />
         <module name="servlet-app" />
+        <module name="spring-mvc-thymeleaf (1)" />
         <module name="spring-mvc-jpa" />
         <module name="spring-mvc-thymeleaf" />
         <module name="spring-mvc-jpa-less4" />

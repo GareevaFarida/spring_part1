@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title> Customers</title>
+
+    <title>Users</title>
 </head>
 
 <body>
@@ -39,26 +40,26 @@
 
 <div class="container">
 
-    <a th:href="@{/customers/create}">Create new Customer</a>
 
-    <table class="table" border="1" th:unless="${customers.size() == 0}">
+    <a th:href="@{/admin/users/registerByAdmin}">Create new User</a>
+
+    <table class="table" border="1" th:unless="${users.size() == 0}">
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Contacts</th>
         </tr>
 
-        <tr th:each="customer : ${customers}">
-            <td th:text="${customer.id}">1</td>
+        <tr th:each="user : ${users}">
 
+            <td th:text="${user.id}">1</td>
             <td>
-                <a th:href="@{/customers/edit?id={id}(id=${customer.id})}" th:text="${customer.name}">Ivan Petrov</a>
+                <a th:href="@{/admin/users/edit?id={id}(id=${user.id})}" th:text="${user.username}">Admin</a>
             </td>
 
-            <td th:text="${customer.contacts}">+7(915)777-77-77</td>
         </tr>
 
     </table>
+
 </div>
 
 <!-- Optional JavaScript -->
@@ -72,6 +73,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
 </body>
 
 </html>

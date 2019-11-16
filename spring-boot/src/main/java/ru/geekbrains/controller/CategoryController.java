@@ -12,7 +12,7 @@ import ru.geekbrains.service.CategoryService;
 
 
 @Controller
-@RequestMapping("categories")
+@RequestMapping("admin/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -47,6 +47,6 @@ public class CategoryController {
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String createCategory(@ModelAttribute("category") Category category) {
         categoryService.save(category);
-        return "redirect:/categories";
+        return "redirect:/admin/categories";
     }
 }

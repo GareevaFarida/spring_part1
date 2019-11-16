@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title> Customers</title>
+    <title>Authorities</title>
 </head>
 
 <body>
@@ -39,23 +39,21 @@
 
 <div class="container">
 
-    <a th:href="@{/customers/create}">Create new Customer</a>
+    <a th:href="@{/admin/authorities/create}">Create new Authority</a>
 
-    <table class="table" border="1" th:unless="${customers.size() == 0}">
+    <table class="table" border="1" th:unless="${authorities.size() == 0}">
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Contacts</th>
         </tr>
 
-        <tr th:each="customer : ${customers}">
-            <td th:text="${customer.id}">1</td>
+        <tr th:each="auth : ${authorities}">
+            <td th:text="${auth.id}">1</td>
 
             <td>
-                <a th:href="@{/customers/edit?id={id}(id=${customer.id})}" th:text="${customer.name}">Ivan Petrov</a>
+                <a th:href="@{/admin/authorities/edit?id={id}(id=${auth.id})}" th:text="${auth.name}">Ivan Petrov</a>
             </td>
 
-            <td th:text="${customer.contacts}">+7(915)777-77-77</td>
         </tr>
 
     </table>

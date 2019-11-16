@@ -7,43 +7,45 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.geekbrains.persistence.entity.Authority;
 import ru.geekbrains.persistence.entity.Customer;
+import ru.geekbrains.service.AuthorityService;
 import ru.geekbrains.service.CustomerService;
 
 @Controller
-@RequestMapping("admin/customers")
-public class CustomerController {
+@RequestMapping("/admin/authorities")
+public class AuthorityController {
 
-    private final CustomerService customerService;
+    private final AuthorityService authorityService;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
+    public AuthorityController(AuthorityService authorityService) {
+        this.authorityService = authorityService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String allCustomers(Model model) {
-        model.addAttribute("customers", customerService.findAll());
-        return "customers";
+        model.addAttribute("authorities", authorityService.findAll());
+        return "authorities";
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public String createCustomerFrom(Model model) {
-        model.addAttribute("customer", new Customer());
+        model.addAttribute("authority", new Authority());
         model.addAttribute("action", "create");
-        return "customer";
+        return "authority";
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.GET)
     public String editForm(@RequestParam("id") Long id, Model model) {
-        model.addAttribute("customer", customerService.findById(id));
+        model.addAttribute("authority", authorityService.getAuthorityById(id));
         model.addAttribute("action", "edit");
-        return "customer";
+        return "authority";
     }
 
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String saveCustomer(@ModelAttribute("customer") Customer customer){
-        customerService.save(customer);
-        return "redirect:/admin/customers";
+    public String saveCustomer(@ModelAttribute("authority") Authority authority){
+        authorityService.save(authority);
+        return "redirect:/admin/authorities";
     }
 }

@@ -14,7 +14,7 @@
         <module>spring-mvc-java</module>
         <module>spring-mvc-jpa</module>
         <module>spring-mvc-jpa-less4</module>
-        <module>spring-thymeleaf</module>
+        <module>spring-mvc-thymeleaf</module>
     </modules>
 
 </project>

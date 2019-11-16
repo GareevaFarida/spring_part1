@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -11,15 +11,39 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>Categories Thymeleaf</title>
+
+    <title>Categories</title>
 </head>
 
 <body>
 
-<div class="container">
-    <a th:href="@{/categories/create}">Create new Category</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Geek Market</a>
 
-    <table class="table" border="1" th:unless="${categories.size() == 0}">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">List</a>
+            </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+
+
+    <a th:href="@{/admin/categories/create}">Create new Category</a>
+
+    <table border="1" th:unless="${categories.size() == 0}">
         <tr>
             <th>Id</th>
             <th>Name</th>
@@ -30,13 +54,14 @@
             <td th:text="${category.id}">1</td>
 
             <td>
-                <a th:href="@{/categories/edit?id={id}(id=${category.id})}" th:text="${category.name}">Product</a>
+                <a th:href="@{/admin/categories/edit?id={id}(id=${category.id})}" th:text="${category.name}">Product</a>
             </td>
 
             <td th:text="${category.description}">Description</td>
         </tr>
 
     </table>
+
 </div>
 
 <!-- Optional JavaScript -->
@@ -50,6 +75,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
 </body>
 
 </html>

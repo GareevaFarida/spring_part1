@@ -1,5 +1,7 @@
 package ru.geekbrains.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class Category {
     private String description;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+    @JsonBackReference
     private List<Product> products;
 
     public Category() {

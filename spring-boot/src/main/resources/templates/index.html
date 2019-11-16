@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
 <head>
     <!-- Required meta tags -->
@@ -11,7 +13,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title> Customers</title>
+    <title>Authorities</title>
 </head>
 
 <body>
@@ -39,26 +41,16 @@
 
 <div class="container">
 
-    <a th:href="@{/customers/create}">Create new Customer</a>
+    <ul class="list-group">
+        <div sec:authorize="hasRole('admin')">
 
-    <table class="table" border="1" th:unless="${customers.size() == 0}">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Contacts</th>
-        </tr>
-
-        <tr th:each="customer : ${customers}">
-            <td th:text="${customer.id}">1</td>
-
-            <td>
-                <a th:href="@{/customers/edit?id={id}(id=${customer.id})}" th:text="${customer.name}">Ivan Petrov</a>
-            </td>
-
-            <td th:text="${customer.contacts}">+7(915)777-77-77</td>
-        </tr>
-
-    </table>
+            <a class="list-group-item list-group-item-action" th:href="@{/admin/users}">Users</a>
+            <a class="list-group-item list-group-item-action" th:href="@{/admin/authorities}">Authorities</a>
+            <a class="list-group-item list-group-item-action" th:href="@{/admin/categories}">Categories</a>
+            <a class="list-group-item list-group-item-action" th:href="@{/admin/customers}">Customers</a>
+        </div>
+        <a class="list-group-item list-group-item-action" th:href="@{/products}">Products</a>
+    </ul>
 </div>
 
 <!-- Optional JavaScript -->
